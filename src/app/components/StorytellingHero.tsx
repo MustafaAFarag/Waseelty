@@ -78,7 +78,7 @@ const StorytellingHero = () => {
       );
 
       if (horizontalContent) {
-        const cards = horizontalContent.querySelector(".flex.gap-24");
+        const cards = horizontalContent.querySelector(".horizontal-cards");
         if (cards) {
           // Ensure only first card is initially visible
           const firstCard = cards.children[0];
@@ -120,68 +120,68 @@ const StorytellingHero = () => {
       }
     }
 
-    // Sticky elements
-    const stickyElements = mainRef.current.querySelectorAll(".sticky-element");
-    stickyElements.forEach((element) => {
-      gsap.to(element, {
-        scrollTrigger: {
-          trigger: element,
-          start: "top 20%",
-          end: "bottom 20%",
-          pin: true,
-          pinSpacing: false,
-        },
-      });
-    });
+    // Sticky elements (DISABLED FOR DEBUGGING)
+    // const stickyElements = mainRef.current.querySelectorAll(".sticky-element");
+    // stickyElements.forEach((element) => {
+    //   gsap.to(element, {
+    //     scrollTrigger: {
+    //       trigger: element,
+    //       start: "top 20%",
+    //       end: "bottom 20%",
+    //       pin: true,
+    //       pinSpacing: false,
+    //     },
+    //   });
+    // });
 
-    // Feature card hover animations
-    const featureCards = mainRef.current.querySelectorAll(".feature-card");
-    featureCards.forEach((card) => {
-      const progressBar = card.querySelector(".feature-progress");
+    // Feature card hover and scroll animations (DISABLED FOR DEBUGGING)
+    // const featureCards = mainRef.current.querySelectorAll(".feature-card");
+    // featureCards.forEach((card) => {
+    //   const progressBar = card.querySelector(".feature-progress");
 
-      // Create hover animations
-      card.addEventListener("mouseenter", () => {
-        gsap.to(progressBar, {
-          scaleX: 1,
-          duration: 0.4,
-          ease: "power2.out",
-        });
+    //   // Create hover animations
+    //   card.addEventListener("mouseenter", () => {
+    //     gsap.to(progressBar, {
+    //       scaleX: 1,
+    //       duration: 0.4,
+    //       ease: "power2.out",
+    //     });
 
-        gsap.to(card.querySelector("img"), {
-          scale: 1.05,
-          duration: 0.4,
-          ease: "power2.out",
-        });
-      });
+    //     gsap.to(card.querySelector("img"), {
+    //       scale: 1.05,
+    //       duration: 0.4,
+    //       ease: "power2.out",
+    //     });
+    //   });
 
-      card.addEventListener("mouseleave", () => {
-        gsap.to(progressBar, {
-          scaleX: 0,
-          duration: 0.4,
-          ease: "power2.in",
-        });
+    //   card.addEventListener("mouseleave", () => {
+    //     gsap.to(progressBar, {
+    //       scaleX: 0,
+    //       duration: 0.4,
+    //       ease: "power2.in",
+    //     });
 
-        gsap.to(card.querySelector("img"), {
-          scale: 1,
-          duration: 0.4,
-          ease: "power2.in",
-        });
-      });
+    //     gsap.to(card.querySelector("img"), {
+    //       scale: 1,
+    //       duration: 0.4,
+    //       ease: "power2.in",
+    //     });
+    //   });
 
-      // Create scroll animations
-      gsap.from(card, {
-        y: 100,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: card,
-          start: "top 90%",
-          end: "top 60%",
-          scrub: 1,
-        },
-      });
-    });
+    //   // Create scroll animations
+    //   gsap.from(card, {
+    //     y: 100,
+    //     opacity: 0,
+    //     duration: 0.8,
+    //     ease: "power3.out",
+    //     scrollTrigger: {
+    //       trigger: card,
+    //       start: "top 90%",
+    //       end: "top 60%",
+    //       scrub: 1,
+    //     },
+    //   });
+    // });
 
     // Add resize listener to refresh ScrollTrigger
     const handleResize = () => {
@@ -349,7 +349,7 @@ const StorytellingHero = () => {
         className="relative h-screen bg-gradient-to-r from-purple-900 to-blue-900 overflow-hidden"
       >
         <div className="horizontal-content flex absolute top-0 left-0 h-full">
-          <div className="flex ml-[50rem] gap-96 p-16 items-center h-full">
+          <div className="horizontal-cards flex ml-[20rem] gap-80 p-16 items-center h-full">
             <div className="flex-shrink-0 w-[min(90vw,500px)] h-auto flex items-center justify-center">
               <div className="bg-black/50 backdrop-blur-sm p-8 rounded-xl w-full h-full text-white">
                 <h2 className="text-4xl font-bold mb-4 split-text">
@@ -607,10 +607,6 @@ const StorytellingHero = () => {
             {/* Card 1 - Left */}
             <motion.div
               className="feature-card absolute left-[5%] top-[15%] w-[300px] md:w-[400px] bg-[#171d2f] rounded-xl overflow-hidden shadow-xl transform -rotate-2 origin-top"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 0.8, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.5 }}
               whileHover={{
                 scale: 1.02,
                 opacity: 1,
@@ -629,7 +625,7 @@ const StorytellingHero = () => {
                 <img
                   src="https://placehold.co/600x400/0f1424/4f88e7"
                   alt="AI Workspace"
-                  className="w-full h-auto mt-8"
+                  className="w-full h-auto mt-8 border-4 border-red-500"
                 />
                 <div className="absolute bottom-0 left-0 right-0 h-[100px] bg-gradient-to-t from-[#171d2f] to-transparent"></div>
               </div>
@@ -646,8 +642,8 @@ const StorytellingHero = () => {
             <motion.div
               className="feature-card absolute left-[20%] top-[30%] w-[300px] md:w-[400px] bg-[#171d2f] rounded-xl overflow-hidden shadow-xl transform rotate-1 origin-top"
               initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 0.8, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
               whileHover={{
                 scale: 1.02,
@@ -685,7 +681,7 @@ const StorytellingHero = () => {
               className="feature-card absolute left-[35%] top-[10%] w-[350px] md:w-[450px] bg-[#171d2f] rounded-xl overflow-hidden shadow-2xl z-10 origin-top"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
               whileHover={{
                 scale: 1.05,
@@ -722,8 +718,8 @@ const StorytellingHero = () => {
             <motion.div
               className="feature-card absolute right-[20%] top-[30%] w-[300px] md:w-[400px] bg-[#171d2f] rounded-xl overflow-hidden shadow-xl transform -rotate-1 origin-top"
               initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 0.8, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 }}
               whileHover={{
                 scale: 1.02,
@@ -762,8 +758,8 @@ const StorytellingHero = () => {
             <motion.div
               className="feature-card absolute right-[5%] top-[15%] w-[300px] md:w-[400px] bg-[#171d2f] rounded-xl overflow-hidden shadow-xl transform rotate-2 origin-top"
               initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 0.8, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.4 }}
               whileHover={{
                 scale: 1.02,
