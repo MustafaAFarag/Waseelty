@@ -82,7 +82,7 @@ const LoadingSequence = ({
           setIsExiting(true);
           setTimeout(() => {
             onComplete();
-          }, 600);
+          }, 0);
           return prev;
         }
         return prev + 1;

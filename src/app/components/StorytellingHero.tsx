@@ -132,16 +132,17 @@ const StorytellingHero = () => {
         style={{ opacity }}
       >
         <motion.div
-          className="container mx-auto px-4 text-center"
+          className="container flex  flex-col items-center mx-auto px-4 text-center "
           style={{ scale }}
         >
+          <Image src="/logo.png" width={400} height={400} alt="Logo" />
           <motion.h1
             className="text-6xl md:text-8xl font-bold mb-6 split-text"
             initial={{ opacity: 0, y: 50 }}
             animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            AI Freelancing Revolution
+            Your AI Freelancing Partner
           </motion.h1>
           <motion.p
             className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto split-text"
@@ -156,11 +157,7 @@ const StorytellingHero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-          >
-            <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full text-lg transition-all">
-              Get Started
-            </button>
-          </motion.div>
+          ></motion.div>
         </motion.div>
 
         <motion.div
