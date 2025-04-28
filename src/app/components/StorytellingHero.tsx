@@ -127,7 +127,7 @@ const StorytellingHero = () => {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push("/dashboard");
+    router.push("/signup");
   };
 
   return (
@@ -789,7 +789,7 @@ const StorytellingHero = () => {
                 and control for your organization.
               </p>
               <a
-                href="/dashboard"
+                href="/signup"
                 className="text-blue-400 hover:text-blue-300 font-medium inline-flex items-center transition-colors duration-200"
               >
                 Learn about Waseelty Enterprise
