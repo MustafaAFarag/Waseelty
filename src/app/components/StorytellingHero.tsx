@@ -6,7 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useInView as useReactInView } from "react-intersection-observer";
 import Image from "next/image";
-
+import Link from "next/link";
 // Register GSAP plugins
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -713,7 +713,7 @@ const StorytellingHero = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.3, delay: 0.3 }}
+            transition={{ duration: 0.3 }}
           >
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Teams of freelancers working with our AI tools can handle tasks
@@ -730,6 +730,78 @@ const StorytellingHero = () => {
               transition={{ duration: 1.5, ease: "easeOut" }}
             />
           </motion.div>
+        </div>
+      </section>
+
+      <section className="min-h-[50vh] bg-gradient-to-b from-[#0f1424] to-black text-white py-20">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-12">
+            {/* Left side with main CTA */}
+            <div className="flex-1">
+              <motion.h2
+                className="text-6xl md:text-7xl font-bold mb-6"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
+                Build more with{" "}
+                <span className="bg-gradient-to-r from-blue-400 to-teal-400 text-transparent bg-clip-text">
+                  Waseelty
+                </span>
+              </motion.h2>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                <Link
+                  href="/dashboard"
+                  className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-lg text-lg transition-colors duration-200"
+                >
+                  Get started
+                </Link>
+              </motion.div>
+            </div>
+
+            {/* Right side with enterprise info */}
+            <motion.div
+              className="flex-1 bg-white/5 backdrop-blur-sm rounded-2xl p-8"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              <h3 className="text-2xl font-semibold mb-4">
+                Need Waseelty for your enterprise?
+              </h3>
+              <p className="text-gray-300 mb-6">
+                Waseelty Enterprise provides additional capabilities, security
+                and control for your organization.
+              </p>
+              <Link
+                href="/enterprise"
+                className="text-blue-400 hover:text-blue-300 font-medium inline-flex items-center transition-colors duration-200"
+              >
+                Learn about Waseelty Enterprise
+                <svg
+                  className="w-5 h-5 ml-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </Link>
+            </motion.div>
+          </div>
         </div>
       </section>
     </div>
