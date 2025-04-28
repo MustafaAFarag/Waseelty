@@ -94,7 +94,7 @@ const LoadingSequence = ({
 
   return (
     <motion.div
-      className={`fixed inset-0 bg-black flex flex-col items-center justify-center text-white z-50 ${className}`}
+      className={`fixed inset-0 bg-black flex flex-col items-center justify-center text-white z-30 ${className}`}
       initial={false}
       animate={{ opacity: isExiting ? 0 : 1 }}
       transition={{ duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] }}

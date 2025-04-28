@@ -6,7 +6,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useInView as useReactInView } from "react-intersection-observer";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 // Register GSAP plugins
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -122,6 +123,12 @@ const StorytellingHero = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push("/dashboard");
+  };
 
   return (
     <div ref={mainRef} className="relative w-full overflow-hidden">
@@ -416,7 +423,7 @@ const StorytellingHero = () => {
         </div>
 
         {/* Decorative elements */}
-        <div className="absolute w-full h-full top-0 left-0 overflow-hidden pointer-events-none">
+        <div className="absolute w-full h-full top-0 left-0 overflow-hidden">
           <svg
             className="absolute top-[20%] left-0 w-full h-[60%] opacity-20"
             xmlns="http://www.w3.org/2000/svg"
@@ -757,12 +764,12 @@ const StorytellingHero = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
-                <Link
-                  href="/dashboard"
-                  className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-lg text-lg transition-colors duration-200"
+                <button
+                  onClick={handleClick}
+                  className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-lg text-lg transition-colors duration-200 cursor-pointer z-[999]"
                 >
                   Get started
-                </Link>
+                </button>
               </motion.div>
             </div>
 
@@ -781,13 +788,13 @@ const StorytellingHero = () => {
                 Waseelty Enterprise provides additional capabilities, security
                 and control for your organization.
               </p>
-              <Link
-                href="/enterprise"
+              <a
+                href="/dashboard"
                 className="text-blue-400 hover:text-blue-300 font-medium inline-flex items-center transition-colors duration-200"
               >
                 Learn about Waseelty Enterprise
                 <svg
-                  className="w-5 h-5 ml-2"
+                  className="w-5 h-5ml-2"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -799,7 +806,7 @@ const StorytellingHero = () => {
                     d="M9 5l7 7-7 7"
                   />
                 </svg>
-              </Link>
+              </a>
             </motion.div>
           </div>
         </div>

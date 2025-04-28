@@ -8,23 +8,33 @@ import LoadingSequence from "./components/LoadingSequence";
 
 export default function Home() {
   const [showContent, setShowContent] = useState(false);
+  const [showLoading, setShowLoading] = useState(true);
 
   return (
-    <LenisProvider>
-      <div className="relative w-full h-full bg-black">
-        <LoadingSequence onComplete={() => setShowContent(true)} />
-        <AnimatePresence mode="wait">
-          {showContent && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.2, ease: "easeInOut" }}
-            >
-              <StorytellingHero />
-            </motion.div>
+    <>
+      <LenisProvider>
+        <div className="relative w-full h-full bg-black">
+          {showLoading && (
+            <LoadingSequence
+              onComplete={() => {
+                setShowContent(true);
+                setShowLoading(false);
+              }}
+            />
           )}
-        </AnimatePresence>
-      </div>
-    </LenisProvider>
+          <AnimatePresence mode="wait">
+            {showContent && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.2, ease: "easeInOut" }}
+              >
+                <StorytellingHero />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </LenisProvider>
+    </>
   );
 }
