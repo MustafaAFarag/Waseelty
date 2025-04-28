@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useInView as useReactInView } from "react-intersection-observer";
+import Image from "next/image";
 
 // Register GSAP plugins
 if (typeof window !== "undefined") {
@@ -22,16 +23,6 @@ const StorytellingHero = () => {
 
   // Intersection Observer for sections
   const [heroRef, heroInView] = useReactInView({
-    threshold: 0.1,
-    triggerOnce: false,
-  });
-
-  const [section2Ref, section2InView] = useReactInView({
-    threshold: 0.1,
-    triggerOnce: false,
-  });
-
-  const [section3Ref, section3InView] = useReactInView({
     threshold: 0.1,
     triggerOnce: false,
   });
@@ -93,7 +84,7 @@ const StorytellingHero = () => {
 
           // Center the first card at the start with extra spacing
           const initialSpacing = (viewportWidth - cardWidth) / 2;
-          (cards as HTMLElement).style.paddingLeft = `${initialSpacing}px`;
+          (cards as HTMLElement).style.paddingLeft = `100px`; // just a normal padding
 
           const scrollDistance = cardsWidth + initialSpacing;
 
@@ -105,11 +96,10 @@ const StorytellingHero = () => {
               start: "top top",
               end: () => `+=${scrollDistance}`,
               pin: true,
-              scrub: 1,
+              scrub: true,
               markers: false,
               anticipatePin: 1,
               onUpdate: (self) => {
-                // Ensure smooth scrolling
                 if (self.progress >= 0.99) {
                   self.scroll(self.end);
                 }
@@ -119,69 +109,6 @@ const StorytellingHero = () => {
         }
       }
     }
-
-    // Sticky elements (DISABLED FOR DEBUGGING)
-    // const stickyElements = mainRef.current.querySelectorAll(".sticky-element");
-    // stickyElements.forEach((element) => {
-    //   gsap.to(element, {
-    //     scrollTrigger: {
-    //       trigger: element,
-    //       start: "top 20%",
-    //       end: "bottom 20%",
-    //       pin: true,
-    //       pinSpacing: false,
-    //     },
-    //   });
-    // });
-
-    // Feature card hover and scroll animations (DISABLED FOR DEBUGGING)
-    // const featureCards = mainRef.current.querySelectorAll(".feature-card");
-    // featureCards.forEach((card) => {
-    //   const progressBar = card.querySelector(".feature-progress");
-
-    //   // Create hover animations
-    //   card.addEventListener("mouseenter", () => {
-    //     gsap.to(progressBar, {
-    //       scaleX: 1,
-    //       duration: 0.4,
-    //       ease: "power2.out",
-    //     });
-
-    //     gsap.to(card.querySelector("img"), {
-    //       scale: 1.05,
-    //       duration: 0.4,
-    //       ease: "power2.out",
-    //     });
-    //   });
-
-    //   card.addEventListener("mouseleave", () => {
-    //     gsap.to(progressBar, {
-    //       scaleX: 0,
-    //       duration: 0.4,
-    //       ease: "power2.in",
-    //     });
-
-    //     gsap.to(card.querySelector("img"), {
-    //       scale: 1,
-    //       duration: 0.4,
-    //       ease: "power2.in",
-    //     });
-    //   });
-
-    //   // Create scroll animations
-    //   gsap.from(card, {
-    //     y: 100,
-    //     opacity: 0,
-    //     duration: 0.8,
-    //     ease: "power3.out",
-    //     scrollTrigger: {
-    //       trigger: card,
-    //       start: "top 90%",
-    //       end: "top 60%",
-    //       scrub: 1,
-    //     },
-    //   });
-    // });
 
     // Add resize listener to refresh ScrollTrigger
     const handleResize = () => {
@@ -259,97 +186,58 @@ const StorytellingHero = () => {
         </motion.div>
       </motion.section>
 
-      {/* Section 2 - Vertical Scroll */}
-      <section
-        ref={section2Ref}
-        className="min-h-screen bg-black text-white py-20"
-      >
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={section2InView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.8 }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
-          >
-            <div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 split-text">
-                Enhance Your Freelance Workflow
-              </h2>
-              <p className="text-lg mb-6 split-text">
-                Our AI-powered platform streamlines your workflow, helping you
-                deliver high-quality results faster than ever before. Focus on
-                what you do best while our tools handle the rest.
-              </p>
-              <ul className="space-y-4">
-                <motion.li
-                  className="flex items-start"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={
-                    section2InView
-                      ? { opacity: 1, x: 0 }
-                      : { opacity: 0, x: -20 }
-                  }
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                >
-                  <span className="text-blue-500 mr-2">✓</span>
-                  <span>Automated task management</span>
-                </motion.li>
-                <motion.li
-                  className="flex items-start"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={
-                    section2InView
-                      ? { opacity: 1, x: 0 }
-                      : { opacity: 0, x: -20 }
-                  }
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                >
-                  <span className="text-blue-500 mr-2">✓</span>
-                  <span>Smart content generation</span>
-                </motion.li>
-                <motion.li
-                  className="flex items-start"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={
-                    section2InView
-                      ? { opacity: 1, x: 0 }
-                      : { opacity: 0, x: -20 }
-                  }
-                  transition={{ duration: 0.5, delay: 0.6 }}
-                >
-                  <span className="text-blue-500 mr-2">✓</span>
-                  <span>Client communication tools</span>
-                </motion.li>
-              </ul>
-            </div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={
-                section2InView
-                  ? { opacity: 1, scale: 1 }
-                  : { opacity: 0, scale: 0.8 }
-              }
-              transition={{ duration: 0.8 }}
-              className="sticky-element"
-              style={{ willChange: "transform" }}
-            >
-              <img
-                src="https://placehold.co/600x400"
-                alt="AI Freelancing Tools"
-                className="rounded-lg shadow-2xl w-full h-auto"
-              />
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
       {/* Section 3 - Horizontal Scroll */}
       <section
         ref={horizontalSectionRef}
         className="relative h-screen bg-gradient-to-r from-purple-900 to-blue-900 overflow-hidden"
       >
         <div className="horizontal-content flex absolute top-0 left-0 h-full">
-          <div className="horizontal-cards flex ml-[20rem] gap-80 p-16 items-center h-full">
+          <div className="horizontal-cards flex gap-80  items-center h-full">
+            {/* Typewriter Text and Arrow */}
+            <div className="flex">
+              <motion.h2
+                className="text-4xl font-bold text- text-white "
+                initial={{ width: 0, opacity: 0 }}
+                animate={{ width: "auto", opacity: 1 }}
+                transition={{
+                  duration: 1,
+                  delay: 0.5,
+                  ease: "easeOut",
+                }}
+                style={{
+                  overflow: "hidden",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                Enhance your Freelance Workflow
+              </motion.h2>
+              <motion.svg
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="text-white"
+                animate={{
+                  x: [0, 10, 0],
+                  opacity: [0.5, 1, 0.5],
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                <path
+                  d="M5 12h14M13 5l7 7-7 7"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </motion.svg>
+            </div>
+
             <div className="flex-shrink-0 w-[min(90vw,500px)] h-auto flex items-center justify-center">
               <div className="bg-black/50 backdrop-blur-sm p-8 rounded-xl w-full h-full text-white">
                 <h2 className="text-4xl font-bold mb-4 split-text">
@@ -360,9 +248,11 @@ const StorytellingHero = () => {
                   algorithms. Perfect for writers, marketers, and content
                   creators.
                 </p>
-                <img
-                  src="https://placehold.co/600x400"
+                <Image
+                  src="/default.png"
                   alt="AI Content Creation"
+                  width={600}
+                  height={400}
                   className="rounded-lg mb-6 w-full h-auto"
                 />
               </div>
@@ -378,9 +268,11 @@ const StorytellingHero = () => {
                   management system. Get insights and recommendations to improve
                   your workflow.
                 </p>
-                <img
-                  src="https://placehold.co/600x400"
+                <Image
+                  src="/default.png"
                   alt="Project Management"
+                  width={600}
+                  height={400}
                   className="rounded-lg mb-6 w-full h-auto"
                 />
               </div>
@@ -395,44 +287,11 @@ const StorytellingHero = () => {
                   Collaborate seamlessly with your clients. Share progress, get
                   feedback, and deliver results that exceed expectations.
                 </p>
-                <img
-                  src="https://placehold.co/600x400"
+                <Image
+                  src="/default.png"
                   alt="Client Collaboration"
-                  className="rounded-lg mb-6 w-full h-auto"
-                />
-              </div>
-            </div>
-
-            <div className="flex-shrink-0 w-[min(90vw,500px)] h-auto flex items-center justify-center">
-              <div className="bg-black/50 backdrop-blur-sm p-8 rounded-xl w-full h-full text-white">
-                <h2 className="text-4xl font-bold mb-4 split-text">
-                  AI Analytics Dashboard
-                </h2>
-                <p className="text-lg mb-6 split-text">
-                  Track your performance with real-time analytics. Get insights
-                  into client engagement, project timelines, and revenue
-                  streams.
-                </p>
-                <img
-                  src="https://placehold.co/600x400"
-                  alt="Analytics Dashboard"
-                  className="rounded-lg mb-6 w-full h-auto"
-                />
-              </div>
-            </div>
-
-            <div className="flex-shrink-0 w-[min(90vw,500px)] h-auto flex items-center justify-center">
-              <div className="bg-black/50 backdrop-blur-sm p-8 rounded-xl w-full h-full text-white">
-                <h2 className="text-4xl font-bold mb-4 split-text">
-                  Automated Invoicing
-                </h2>
-                <p className="text-lg mb-6 split-text">
-                  Streamline your billing process with our automated invoicing
-                  system. Create, send, and track invoices without the hassle.
-                </p>
-                <img
-                  src="https://placehold.co/600x400"
-                  alt="Automated Invoicing"
+                  width={600}
+                  height={400}
                   className="rounded-lg mb-6 w-full h-auto"
                 />
               </div>
@@ -533,7 +392,7 @@ const StorytellingHero = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.3 }}
           >
             AI Tools Work
           </motion.h2>
@@ -542,7 +401,7 @@ const StorytellingHero = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.3, delay: 0.2 }}
           >
             tirelessly and in parallel
           </motion.h2>
@@ -551,7 +410,7 @@ const StorytellingHero = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.3, delay: 0.3 }}
           >
             Teams using our AI tools can handle multiple tasks simultaneously,
             from content creation and project management to client communication
@@ -622,17 +481,19 @@ const StorytellingHero = () => {
                   <div className="h-3 w-3 rounded-full bg-green-500 ml-2"></div>
                   <div className="text-xs text-white ml-3">AI Workspace</div>
                 </div>
-                <img
-                  src="https://placehold.co/600x400/0f1424/4f88e7"
+                <Image
+                  src="/default.png"
                   alt="AI Workspace"
-                  className="w-full h-auto mt-8 border-4 border-red-500"
+                  width={600}
+                  height={400}
+                  className="w-full h-auto mt-6 border-4"
                 />
-                <div className="absolute bottom-0 left-0 right-0 h-[100px] bg-gradient-to-t from-[#171d2f] to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 h-[60px] bg-gradient-to-t from-[#171d2f] to-transparent"></div>
               </div>
-              <div className="p-6 relative">
-                <div className="bg-blue-500/20 h-3 w-[70%] rounded mb-3"></div>
-                <div className="bg-blue-500/10 h-2 w-[90%] rounded mb-2"></div>
-                <div className="bg-blue-500/10 h-2 w-[60%] rounded mb-2"></div>
+              <div className="p-4 relative">
+                <div className="bg-blue-500/20 h-3 w-[70%] rounded mb-2"></div>
+                <div className="bg-blue-500/10 h-2 w-[90%] rounded mb-1"></div>
+                <div className="bg-blue-500/10 h-2 w-[60%] rounded mb-1"></div>
                 <div className="bg-blue-500/10 h-2 w-[80%] rounded"></div>
               </div>
               <div className="absolute bottom-0 left-0 w-full h-1 bg-blue-500 scale-x-0 origin-left transition-transform duration-300 feature-progress"></div>
@@ -660,17 +521,19 @@ const StorytellingHero = () => {
                   <div className="h-3 w-3 rounded-full bg-green-500 ml-2"></div>
                   <div className="text-xs text-white ml-3">Smart Analytics</div>
                 </div>
-                <img
-                  src="https://placehold.co/600x400/0f1424/4aade7"
+                <Image
+                  src="/default.png"
                   alt="Smart Analytics"
-                  className="w-full h-auto mt-8"
+                  width={600}
+                  height={400}
+                  className="w-full h-auto mt-6"
                 />
-                <div className="absolute bottom-0 left-0 right-0 h-[100px] bg-gradient-to-t from-[#171d2f] to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 h-[60px] bg-gradient-to-t from-[#171d2f] to-transparent"></div>
               </div>
-              <div className="p-6 relative">
-                <div className="bg-blue-500/20 h-3 w-[70%] rounded mb-3"></div>
-                <div className="bg-blue-500/10 h-2 w-[90%] rounded mb-2"></div>
-                <div className="bg-blue-500/10 h-2 w-[60%] rounded mb-2"></div>
+              <div className="p-4 relative">
+                <div className="bg-blue-500/20 h-3 w-[70%] rounded mb-2"></div>
+                <div className="bg-blue-500/10 h-2 w-[90%] rounded mb-1"></div>
+                <div className="bg-blue-500/10 h-2 w-[60%] rounded mb-1"></div>
                 <div className="bg-blue-500/10 h-2 w-[80%] rounded"></div>
               </div>
               <div className="absolute bottom-0 left-0 w-full h-1 bg-blue-500 scale-x-0 origin-left transition-transform duration-300 feature-progress"></div>
@@ -682,7 +545,7 @@ const StorytellingHero = () => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              transition={{ duration: 0.3, delay: 0.2 }}
               whileHover={{
                 scale: 1.05,
                 boxShadow: "0 20px 30px rgba(0, 0, 0, 0.3)",
@@ -698,17 +561,19 @@ const StorytellingHero = () => {
                     Automated Workflows
                   </div>
                 </div>
-                <img
-                  src="https://placehold.co/600x400/0f1424/4f5ce7"
+                <Image
+                  src="/default.png"
                   alt="Automated Workflows"
-                  className="w-full h-auto mt-8"
+                  width={600}
+                  height={400}
+                  className="w-full h-auto mt-6"
                 />
-                <div className="absolute bottom-0 left-0 right-0 h-[100px] bg-gradient-to-t from-[#171d2f] to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 h-[60px] bg-gradient-to-t from-[#171d2f] to-transparent"></div>
               </div>
-              <div className="p-6 relative">
-                <div className="bg-blue-500/20 h-3 w-[70%] rounded mb-3"></div>
-                <div className="bg-blue-500/10 h-2 w-[90%] rounded mb-2"></div>
-                <div className="bg-blue-500/10 h-2 w-[60%] rounded mb-2"></div>
+              <div className="p-4 relative">
+                <div className="bg-blue-500/20 h-3 w-[70%] rounded mb-2"></div>
+                <div className="bg-blue-500/10 h-2 w-[90%] rounded mb-1"></div>
+                <div className="bg-blue-500/10 h-2 w-[60%] rounded mb-1"></div>
                 <div className="bg-blue-500/10 h-2 w-[80%] rounded"></div>
               </div>
               <div className="absolute bottom-0 left-0 w-full h-1 bg-blue-500 scale-x-0 origin-left transition-transform duration-300 feature-progress"></div>
@@ -720,7 +585,7 @@ const StorytellingHero = () => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
+              transition={{ duration: 0.3, delay: 0.3 }}
               whileHover={{
                 scale: 1.02,
                 opacity: 1,
@@ -738,17 +603,19 @@ const StorytellingHero = () => {
                     Client Management
                   </div>
                 </div>
-                <img
-                  src="https://placehold.co/600x400/0f1424/4fa3e7"
+                <Image
+                  src="/default.png"
                   alt="Client Management"
-                  className="w-full h-auto mt-8"
+                  width={600}
+                  height={400}
+                  className="w-full h-auto mt-6"
                 />
-                <div className="absolute bottom-0 left-0 right-0 h-[100px] bg-gradient-to-t from-[#171d2f] to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 h-[60px] bg-gradient-to-t from-[#171d2f] to-transparent"></div>
               </div>
-              <div className="p-6 relative">
-                <div className="bg-blue-500/20 h-3 w-[70%] rounded mb-3"></div>
-                <div className="bg-blue-500/10 h-2 w-[90%] rounded mb-2"></div>
-                <div className="bg-blue-500/10 h-2 w-[60%] rounded mb-2"></div>
+              <div className="p-4 relative">
+                <div className="bg-blue-500/20 h-3 w-[70%] rounded mb-2"></div>
+                <div className="bg-blue-500/10 h-2 w-[90%] rounded mb-1"></div>
+                <div className="bg-blue-500/10 h-2 w-[60%] rounded mb-1"></div>
                 <div className="bg-blue-500/10 h-2 w-[80%] rounded"></div>
               </div>
               <div className="absolute bottom-0 left-0 w-full h-1 bg-blue-500 scale-x-0 origin-left transition-transform duration-300 feature-progress"></div>
@@ -760,7 +627,7 @@ const StorytellingHero = () => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.4 }}
+              transition={{ duration: 0.3, delay: 0.4 }}
               whileHover={{
                 scale: 1.02,
                 opacity: 1,
@@ -778,17 +645,19 @@ const StorytellingHero = () => {
                     Content Generation
                   </div>
                 </div>
-                <img
-                  src="https://placehold.co/600x400/0f1424/4f6ae7"
+                <Image
+                  src="/default.png"
                   alt="Content Generation"
-                  className="w-full h-auto mt-8"
+                  width={600}
+                  height={400}
+                  className="w-full h-auto mt-6"
                 />
-                <div className="absolute bottom-0 left-0 right-0 h-[100px] bg-gradient-to-t from-[#171d2f] to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 h-[60px] bg-gradient-to-t from-[#171d2f] to-transparent"></div>
               </div>
-              <div className="p-6 relative">
-                <div className="bg-blue-500/20 h-3 w-[70%] rounded mb-3"></div>
-                <div className="bg-blue-500/10 h-2 w-[90%] rounded mb-2"></div>
-                <div className="bg-blue-500/10 h-2 w-[60%] rounded mb-2"></div>
+              <div className="p-4 relative">
+                <div className="bg-blue-500/20 h-3 w-[70%] rounded mb-2"></div>
+                <div className="bg-blue-500/10 h-2 w-[90%] rounded mb-1"></div>
+                <div className="bg-blue-500/10 h-2 w-[60%] rounded mb-1"></div>
                 <div className="bg-blue-500/10 h-2 w-[80%] rounded"></div>
               </div>
               <div className="absolute bottom-0 left-0 w-full h-1 bg-blue-500 scale-x-0 origin-left transition-transform duration-300 feature-progress"></div>
@@ -847,7 +716,7 @@ const StorytellingHero = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 0.3, delay: 0.3 }}
           >
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Teams of freelancers working with our AI tools can handle tasks
@@ -863,69 +732,6 @@ const StorytellingHero = () => {
               viewport={{ once: false, amount: 0.8 }}
               transition={{ duration: 1.5, ease: "easeOut" }}
             />
-
-            {/* Interactive buttons */}
-            <div className="flex justify-center gap-4 mt-10">
-              <motion.button
-                className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-full text-sm transition-all"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Learn More
-              </motion.button>
-              <motion.button
-                className="bg-transparent border border-blue-500 text-blue-500 hover:bg-blue-500/10 py-2 px-6 rounded-full text-sm transition-all"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Watch Demo
-              </motion.button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Section 5 - Final CTA */}
-      <section
-        ref={section3Ref}
-        className="min-h-screen bg-black text-white py-20 flex items-center"
-      >
-        <div className="container mx-auto px-4 text-center">
-          <motion.h2
-            className="text-5xl md:text-6xl font-bold mb-8 split-text"
-            initial={{ opacity: 0, y: 30 }}
-            animate={
-              section3InView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
-            }
-            transition={{ duration: 0.8 }}
-          >
-            Ready to Transform Your Freelance Career?
-          </motion.h2>
-          <motion.p
-            className="text-xl mb-12 max-w-3xl mx-auto split-text"
-            initial={{ opacity: 0, y: 20 }}
-            animate={
-              section3InView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-            }
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            Join thousands of freelancers who have already upgraded their
-            services with our AI tools.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={
-              section3InView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-            }
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full text-lg transition-all">
-              Start Free Trial
-            </button>
-            <button className="bg-transparent border-2 border-white hover:bg-white/10 text-white font-bold py-3 px-8 rounded-full text-lg transition-all">
-              Learn More
-            </button>
           </motion.div>
         </div>
       </section>
