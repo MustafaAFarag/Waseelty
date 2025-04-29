@@ -24,7 +24,7 @@ const Navbar: FC = () => {
       initial="hidden"
       animate="visible"
       variants={navVariants}
-      className="w-full  border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50"
+      className="w-full  border-b  backdrop-blur-sm sticky top-0 z-50 "
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between relative">
         <Link href="/" className="flex items-center">

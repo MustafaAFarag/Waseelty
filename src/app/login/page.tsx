@@ -18,14 +18,14 @@ export default function LoginPage() {
       {/* Left Column - Login Form */}
       <div className="flex flex-1 flex-col  p-20 pt-28">
         <div className="flex justify-center mb-5">
-          <div className="bg-foreground/40 w-20 h-20 flex items-center justify-center rounded-full">
+          
             <Link
               href="/dashboard/freelancer"
               className="flex justify-center items-center gap-2 text-primary"
             >
-              <Image src="/logo.png" height={200} width={200} alt="logo" />
+              <Image src="/logo.png" height={150} width={150} alt="logo" />
             </Link>
-          </div>
+          
         </div>
 
         <div className="mx-auto w-full max-w-md space-y-8">
@@ -177,14 +177,7 @@ export default function LoginPage() {
         className="hidden md:flex md:w-1/2 md:flex-col md:items-center md:justify-center p-8 text-white bg-cover bg-center"
         style={{ backgroundImage: "url('/bird.webp')" }}
       >
-        <div className="max-w-md bg-black/50 p-8 rounded-lg">
-          <h2 className="text-3xl font-bold">
-            Effortlessly manage your team and operations.
-          </h2>
-          <p className="mt-4">
-            Log in to access your CRM dashboard and manage your team.
-          </p>
-        </div>
+        
       </div>
     </div>
   );
