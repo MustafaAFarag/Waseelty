@@ -4,7 +4,8 @@ import Image from "next/image"
 
 export default function SignupPage() {
   return (
-    <div className="flex min-h-screen flex-col md:flex-row bg-white/70">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+  <div className="flex w-full max-w-7xl flex-col md:flex-row bg-white rounded-xl shadow-lg overflow-hidden max-h-[90vh]">
      <div
         className="hidden md:flex md:w-1/2 md:flex-col md:items-center md:justify-center p-8 text-white bg-cover bg-center"
         style={{ backgroundImage: "url('/default.png')" }}
@@ -26,7 +27,7 @@ export default function SignupPage() {
             <h1></h1>
           </div>
 
-          <form className="space-y-4">
+          <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label htmlFor="firstName" className="sr-only">
@@ -94,7 +95,7 @@ export default function SignupPage() {
               Sign up
               </Link>
             </button>
-          </form>
+          </div>
 
           <div className="mt-6 text-center text-sm text-gray-600">
             Already have an account?{" "}
@@ -143,6 +144,7 @@ export default function SignupPage() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   )
 }

@@ -142,7 +142,7 @@ const StorytellingHero = () => {
           className="container flex  flex-col items-center mx-auto px-4 text-center "
           style={{ scale }}
         >
-          <Image src="/logo.png" width={400} height={400} alt="Logo" />
+          <Image src="/logo-hero.png" width={400} height={400} alt="Logo" />
           <motion.h1
             className="text-6xl md:text-8xl font-bold mb-6 split-text"
             initial={{ opacity: 0, y: 50 }}

@@ -14,9 +14,10 @@ export default function LoginPage() {
     router.push("/dashboard/freelancer");
   };
   return (
-    <div className="flex min-h-screen flex-col md:flex-row">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+  <div className="flex w-full max-w-7xl flex-col md:flex-row bg-white rounded-xl shadow-lg overflow-hidden max-h-[90vh]">
       {/* Left Column - Login Form */}
-      <div className="flex flex-1 flex-col  p-20 pt-28">
+      <div className="flex flex-1 flex-col p-20 ">
         <div className="flex justify-center mb-5">
           
             <Link
@@ -180,5 +181,7 @@ export default function LoginPage() {
         
       </div>
     </div>
+    </div>
+
   );
 }
